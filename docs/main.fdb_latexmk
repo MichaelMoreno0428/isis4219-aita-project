@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1746638622.78351 "main.aux" "main.bbl" "main" 1746638623.61089 0
+["bibtex main"] 1746652645.35511 "main.aux" "main.bbl" "main" 1746652646.28425 0
   "./references.bib" 1746638619.9767 1469 ea3983aceb1501e89a5763b93ebc409e ""
   "/usr/local/texlive/2024/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1746638623.38543 1414 caa4af90586a626fb5555a3fc879c388 "pdflatex"
+  "main.aux" 1746652646.03525 1414 a14597db8eda4294b0dad71ca82be2fe "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1746638622.87935 "/Users/juan/Local/2025-10loc/ISIS4219/Proyecto/docs/main.tex" "main.pdf" "main" 1746638623.61101 0
-  "/Users/juan/Local/2025-10loc/ISIS4219/Proyecto/docs/main.tex" 1746638572.58708 1942 77b91d649dcff2961a75f76fc622677a ""
+["pdflatex"] 1746652645.48436 "/Users/juan/Local/2025-10loc/ISIS4219/Proyecto/docs/main.tex" "main.pdf" "main" 1746652646.28437 0
+  "/Users/juan/Local/2025-10loc/ISIS4219/Proyecto/docs/main.tex" 1746652644.17613 1407 9fc5a46cb4c3bb6b7dc5784038d61cac ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -83,9 +83,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1732125442.81949 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1732125342 8221428 71eb930738029d1450c5d288e0709c07 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "main.aux" 1746638623.38543 1414 caa4af90586a626fb5555a3fc879c388 "pdflatex"
-  "main.bbl" 1746638622.87734 2019 cff7b51297b8ee0d1da213b5d10bc1a5 "bibtex main"
-  "main.tex" 1746638572.58708 1942 77b91d649dcff2961a75f76fc622677a ""
+  "main.aux" 1746652646.03525 1414 a14597db8eda4294b0dad71ca82be2fe "pdflatex"
+  "main.bbl" 1746652645.48249 2019 cff7b51297b8ee0d1da213b5d10bc1a5 "bibtex main"
+  "main.tex" 1746652644.17613 1407 9fc5a46cb4c3bb6b7dc5784038d61cac ""
   "sections/discusion-conclusion/discusion-conclusion.tex" 1746637979.08951 42 667f0c07e6846918103969b09dcb922c ""
   "sections/estado-del-arte/estado-del-arte.tex" 1746638561.76586 4825 ea0dab92cf9bf81c6604086f3bb28d61 ""
   "sections/introduccion/introduccion.tex" 1746638436.7814 6565 73012ff86be5fdb0993948b5af3f5a34 ""
