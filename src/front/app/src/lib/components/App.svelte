@@ -1,44 +1,33 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
   import ModelSelector from './ModelSelector.svelte';
   import TextInput from './TextInput.svelte';
-
-  let file: File | null = null;
-  let resultUrl: string | null = null;
+  let models = ['XMLBERT', 'HuggingFace', 'Classic ML', 'gpt-4o'];
+  let selectedModel = models[0];
+  let inputText = '';
+  let predictionResult: string | null = null;
   let loading = false;
 
-  const models = ['XMLBERT', 'HuggingFace', 'Classic ML', 'gpt-4o'];
-  let selectedModel = models[0];
-
-  onDestroy(() => {
-    if (resultUrl) URL.revokeObjectURL(resultUrl);
-  });
-
-  async function upload() {
-    if (!file || !selectedModel) return;
+  async function predict() {
+    if (!inputText || !selectedModel) return;
     loading = true;
-
-    if (resultUrl) {
-      URL.revokeObjectURL(resultUrl);
-      resultUrl = null;
-    }
-
-    const form = new FormData();
-    form.append('file', file);
+    predictionResult = null;
 
     try {
       const res = await fetch(`http://localhost:8000/predict/${selectedModel}`, {
         method: 'POST',
-        body: form,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: inputText }),
       });
 
       if (!res.ok) {
-        console.error('Upload failed', await res.text());
+        console.error(await res.text());
         return;
       }
 
-      const blob = await res.blob();
-      resultUrl = URL.createObjectURL(blob);
+      const data = await res.json();
+      predictionResult = data.result;
+    } catch (e) {
+      console.error(e);
     } finally {
       loading = false;
     }
@@ -46,46 +35,51 @@
 </script>
 
 <div class="container">
-  <h1>r/AITA model prediction</h1>
+  <h1>r/AITA Model Prediction</h1>
 
-  <ModelSelector
-    {models}
-    {selectedModel}
-    onSelect={(model) => selectedModel = model}
-  />
+  <ModelSelector {models} {selectedModel} onSelect={(m) => selectedModel = m} />
 
-  <TextInput/>
+  <TextInput bind:value={inputText} placeholder="Paste AITA post here..." />
 
-  <button class="upload-button" on:click={upload} disabled={!file || loading}>
-    {#if loading}Procesando{:else}Predecir{/if}
+  <button class="upload-button" on:click={predict} disabled={!inputText || loading}>
+    {#if loading}Processing...{:else}Predict{/if}
   </button>
 
-  <!-- show the prediction here -->
+  {#if predictionResult}
+    <div class="result">
+      <h2>Prediction:</h2>
+      <p>{predictionResult}</p>
+    </div>
+  {/if}
 </div>
 
 <style>
   .container {
     max-width: 800px;
     margin: 2rem auto;
-    text-align: center;
-    font-family: system-ui, sans-serif;
     padding: 1rem;
+    font-family: system-ui, sans-serif;
+    text-align: center;
   }
-  h1 {
-    margin-bottom: 1rem;
-  }
+
   .upload-button {
     padding: 0.75rem 1.5rem;
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
+    margin-top: 1rem;
     cursor: pointer;
-    margin-bottom: 2rem;
   }
+
   .upload-button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
+  }
+
+  .result {
+    margin-top: 2rem;
+    font-size: 1.25rem;
   }
 </style>
