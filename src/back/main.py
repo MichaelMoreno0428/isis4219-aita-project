@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
 import os
+from gpt_client import get_aita_classification
 
 app = FastAPI()
 
@@ -38,19 +39,7 @@ async def predict_text(model_name: str, payload: TextPayload):
     elif model_name == "XMLBERT":
         result = "ESH"
     elif model_name == "gpt-4o":
-        try:
-            response = client.chat.completions.create(
-                model=deployment_name,
-                messages=[
-                    {"role": "system", "content": "Actúa como un asistente de moderación que clasifica textos según las categorías del subreddit AITA. Tu respuesta debe estar en formato JSON con dos campos: 'etiqueta_aita', que puede ser una de las siguientes: YTA, NTA, ESH, INFO, y 'razonamiento', que es una explicación de por qué elegiste esa etiqueta. El razonamiento debe incluir un pequeño resumen de la situación analizada y una justificación clara y coherente. El formato de la respuesta debe ser estrictamente así:\n\n{\n  \"etiqueta_aita\": \"NTA\",\n  \"razonamiento\": \"El usuario explicó que su pareja no colaboró en las tareas del hogar, por lo tanto no es responsable del conflicto.\"\n}"},
-                    {"role": "user", "content": text}
-                ],
-                temperature=0.6,
-                max_tokens=100
-            )
-            result = response.choices[0].message.content.strip()
-        except Exception as e:
-            result = f"Error: {str(e)}"
+        result = get_aita_classification(text)
     else:
         result = "Unknown model"
 
