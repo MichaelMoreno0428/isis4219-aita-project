@@ -25,7 +25,7 @@ def get_aita_classification(text: str) -> dict:
                         "YTA, NTA, ESH, INFO, y 'razonamiento', que es una explicación de por qué elegiste esa etiqueta. "
                         "El razonamiento debe incluir un pequeño resumen de la situación analizada y una justificación clara y coherente. "
                         "El formato de la respuesta debe ser estrictamente así:\n\n"
-                        "{\n  \"etiqueta_aita\": \"NTA\",\n  \"razonamiento\": \"El usuario explicó que su pareja no colaboró en las tareas del hogar, por lo tanto no es responsable del conflicto.\"\n}"
+                        "{\n  \"etiqueta_aita\": \"<etiqueta>\",\n  \"razonamiento\": \"<razonamiento_breve>\"\n}"
                     )
                 },
                 {"role": "user", "content": text}
@@ -34,7 +34,6 @@ def get_aita_classification(text: str) -> dict:
             max_tokens=100
         )
 
-        # Limpiar y parsear
         content = " ".join(response.choices[0].message.content.strip().split())
         try:
             parsed = json.loads(content)

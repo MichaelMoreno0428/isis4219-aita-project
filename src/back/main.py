@@ -18,15 +18,9 @@ app.add_middleware(
 class TextPayload(BaseModel):
     text: str
 
-from openai import AzureOpenAI
-DEFAULT_KEY = "PONERLALLAVE"
-deployment_name = 'gpt'
-
-client = AzureOpenAI(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", "https://invuniandesai-2.openai.azure.com/"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY", DEFAULT_KEY),
-    api_version="2024-10-21"
-)
+@app.get("/")
+async def hello_world():
+    return {"message": "Hello, world!"}
 
 @app.post("/predict/{model_name}")
 async def predict_text(model_name: str, payload: TextPayload):
