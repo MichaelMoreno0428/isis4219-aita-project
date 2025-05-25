@@ -4,7 +4,7 @@
   let models = ['XMLBERT', 'HuggingFace', 'Classic ML', 'gpt-4o'];
   let selectedModel = models[0];
   let inputText = '';
-  let predictionResult: string | null = null;
+let predictionResult: any = null;
   let loading = false;
 
   async function predict() {
@@ -48,7 +48,12 @@
   {#if predictionResult}
     <div class="result">
       <h2>Prediction:</h2>
-      <p>{predictionResult}</p>
+      {#if selectedModel === 'gpt-4o'}
+        <p><strong>Etiqueta AITA:</strong> {predictionResult.etiqueta_aita}</p>
+        <p><strong>Razonamiento:</strong> {predictionResult.razonamiento}</p>
+      {:else}
+        <p>{predictionResult}</p>
+      {/if}
     </div>
   {/if}
 </div>
