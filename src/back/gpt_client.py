@@ -30,7 +30,7 @@ def get_aita_classification(text: str) -> dict:
                 },
                 {"role": "user", "content": text}
             ],
-            temperature=0.3,
+            temperature=0.8,
             max_tokens=100
         )
 
