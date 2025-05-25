@@ -12,7 +12,7 @@
 </script>
 
 <textarea
-  bind:value
+  bind:value={value}
   placeholder={placeholder}
   {disabled}
   on:input={handleInput}
