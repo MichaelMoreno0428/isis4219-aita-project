@@ -48,7 +48,7 @@ let predictionResult: any = null;
   {#if predictionResult}
     <div class="result">
       <h2>Prediction:</h2>
-      {#if selectedModel === 'gpt-4o'}
+      {#if selectedModel === 'gpt-4o' || selectedModel === 'naive_bayes' || selectedModel === 'logistic_regression'}
         <p><strong>Etiqueta AITA:</strong> {predictionResult.etiqueta_aita}</p>
         <p><strong>Razonamiento:</strong> {predictionResult.razonamiento}</p>
       {:else}

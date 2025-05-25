@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import openai
 import os
 from gpt_client import get_aita_classification
+from ml_classic import predict_with_logistic_regression, predict_with_naive_bayes
 
 app = FastAPI()
 
@@ -18,15 +19,6 @@ app.add_middleware(
 class TextPayload(BaseModel):
     text: str
 
-from openai import AzureOpenAI
-DEFAULT_KEY = "PONERLALLAVE"
-deployment_name = 'gpt'
-
-client = AzureOpenAI(
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", "https://invuniandesai-2.openai.azure.com/"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY", DEFAULT_KEY),
-    api_version="2024-10-21"
-)
 
 @app.post("/predict/{model_name}")
 async def predict_text(model_name: str, payload: TextPayload):
@@ -40,6 +32,10 @@ async def predict_text(model_name: str, payload: TextPayload):
         result = "ESH"
     elif model_name == "gpt-4o":
         result = get_aita_classification(text)
+    elif model_name == "logistic_regression":
+        result = predict_with_logistic_regression(text)
+    elif model_name == "naive_bayes":
+        result = predict_with_naive_bayes(text)
     else:
         result = "Unknown model"
 
